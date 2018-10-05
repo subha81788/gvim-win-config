@@ -1,0 +1,8 @@
+source ~/vimfiles/startup/color.vim
+
+" Set extra options when running in GUI mode
+if has("gui_running")
+    if has("win32")
+        set guifont=Lucida_Console:h10:cDEFAULT
+    endif
+endif
