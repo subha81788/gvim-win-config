@@ -1,0 +1,191 @@
+" Emulated Plugins
+set easymotion
+set surround
+set NERDTree
+
+" let mapleader = ","
+let mapleader = " "
+" let maplocalleader = ","
+
+set showmode
+set number relativenumber
+set smartcase
+set history=1000
+" set scrolloff=3 " 3 lines above/below cursor when scrolling
+autocmd VimEnter,WinEnter * let &scrolloff = winheight(0) / 4
+
+" configure tabwidth and insert spaces instead of tabs
+set softtabstop=4        " tab width is 4 spaces
+set shiftwidth=4     " indent also with 4 spaces
+set expandtab        " expand tabs to indent
+" wrap lines at 80 chars
+set textwidth=80
+set foldcolumn=1
+set colorcolumn=+1,+2
+
+" Idea specific settings
+set idearefactormode=keep
+" Use Idea to join lines smartly
+set ideajoin
+" IdeaVim uses 'a' for alt instead of Vim's 'm'
+nmap <a-j> 15gj
+nmap <a-k> 15gk
+
+" Multiple cursors support
+set multiple-cursors
+
+" These settings are from - https://github.com/Valloric/dotfiles/blob/master/intellij/ideavimrc
+
+" Search
+set hlsearch
+" clear the search buffer when hitting return
+nnoremap \<cr> :nohlsearch<cr>
+" nmap <leader>/ :action Find<cr>
+" built in search looks better
+nnoremap / :action Find<cr>
+" but preserve ideavim search
+nnoremap g/ /
+nmap <leader>\ :action FindInPath<cr>
+
+" Moving lines
+nmap [l :action MoveLineUp<cr>
+nmap ]l :action MoveLineDown<cr>
+
+" Moving statements
+nmap [s :action MoveStatementUp<cr>
+nmap ]s :action MoveStatementDown<cr>
+
+" options
+nnoremap cow :action EditorToggleUseSoftWraps<cr>
+nnoremap col :action EditorToggleShowWhitespaces<cr>
+
+" Use Q for formatting the current paragraph (or visual selection)
+vmap Q gq
+nmap Q gqap
+
+" These create newlines like o and O but stay in normal mode
+nmap zj o<Esc>k
+nmap zk O<Esc>j
+
+" Navigation
+nmap <leader>h :action Back<cr>
+nmap <leader>l :action Forward<cr>
+nmap <leader>L :action RecentLocations<cr>
+nmap <leader>g :action GotoDeclaration<cr>
+nmap <leader>u :action FindUsages<cr>
+nmap <leader>f :action GotoFile<cr>
+nmap <leader>c :action GotoClass<cr>
+" nmap <leader>s :action GotoSymbol<cr>
+nmap <leader>s :action SelectInProjectView<cr>
+" nmap <leader>m :action FileStructurePopup<cr>
+nmap <leader>o :action FileStructurePopup<cr>
+nmap <leader>M :action ActivateStructureToolWindow<cr>
+nmap <leader>i :action GotoImplementation<cr>
+nmap <leader>I :action SelectIn<cr>
+" nmap <leader>e :action RecentFiles<cr>
+nmap <leader>t :action GotoTest<cr>
+" nmap <leader>p :action JumpToLastWindow<cr>
+nmap <leader>b :action ToggleLineBreakpoint<cr>
+nmap <leader>B :action ShowBookmarks<cr>
+" nmap <leader>a :action Switcher<cr>
+nmap <leader>a :action RecentChangedFiles<cr>
+
+" Errors
+nmap <leader>e :action GotoNextError<cr>
+nmap <leader>E :action GotoPreviousError<cr>
+nmap <leader>ed :action ShowErrorDescription<cr>
+
+" Refactorings
+vmap T :action Refactorings.QuickListPopupAction<cr>
+nmap <leader>rr :action RenameElement<cr>
+nmap <leader>rg :action Generate<cr>
+nmap <leader>ro :action OptimizeImports<cr>
+
+" Inspection
+nmap <leader>rc :action InspectCode<cr>
+
+" Copy to system clipboard as well
+set clipboard+=unnamed
+
+" system clipboard
+vmap <leader>y "+y
+vmap <leader>d "+d
+nmap <leader>y "+yy
+nmap <leader>p "+p
+nmap <leader>P "+P
+vmap <leader>p "+p
+vmap <leader>P "+P
+
+" Won't work in visual mode (with vmap) for some reason.
+" Use default map of <c-/> for that.
+nmap gcc :action CommentByLineComment<cr>
+
+" unimpaired mappings - from https://github.com/saaguero/ideavimrc/blob/master/.ideavimrc
+nnoremap [<space> O<esc>j
+nnoremap ]<space> o<esc>k
+nnoremap [q :action PreviousOccurence<cr>
+nnoremap ]q :action NextOccurence<cr>
+nnoremap [m :action MethodUp<cr>
+nnoremap ]m :action MethodDown<cr>
+nnoremap [c :action VcsShowPrevChangeMarker<cr>
+nnoremap ]c :action VcsShowNextChangeMarker<cr>
+
+" Tabs
+nnoremap [b :action PreviousTab<cr>
+nnoremap ]b :action NextTab<cr>
+
+" key bindings for quickly moving between windows
+" h left, l right, k up, j down
+nmap ,h <c-w>h
+nmap ,l <c-w>l
+nmap ,k <c-w>k
+nmap ,j <c-w>j
+
+" Closing tabs
+nmap <leader>q :action CloseContent<cr>
+nmap <leader>Q :action ReopenClosedTab<cr>
+
+" To navigate between split panes
+nmap <leader>wo :action NextSplitter<cr>
+nmap <leader>wp :action PrevSplitter<cr>
+nmap <leader>j :action PrevSplitter<cr>
+
+" Splits manipulation
+nmap <leader>ws :action SplitHorizontally<cr>
+nmap <leader>wv :action SplitVertically<cr>
+nmap <leader>wc :action Unsplit<cr>
+nmap <leader>wC :action UnsplitAll<cr>
+nmap <leader>wd :action OpenEditorInOppositeTabGroup<cr>
+nmap <leader><leader> :action VimFilePrevious<cr>
+" nmap <leader>ww :action JumpToLastWindow<cr>
+
+" NERDTree settings
+let g:NERDTreeMapActivateNode='l'
+let g:NERDTreeMapJumpParent='h'
+
+" Building, Running and Debugging
+nmap \c :action CompileDirty<cr>
+nmap \r :action Run<cr>
+nmap \R :action RunAnything<cr>
+nmap \b :action Debug<cr>
+nmap \c :action RunClass<cr>
+nmap \d :action DebugClass<cr>
+nmap \t :action RerunTests<cr>                                         
+nmap \T :action RerunFailedTests<cr>
+
+" VCS operations
+nmap <leader>yy :action Vcs.Show.Local.Changes<cr>                          
+nmap <leader>yp :action Vcs.QuickListPopupAction<cr>
+nmap <leader>ya :action Annotate<cr>
+nmap <leader>yl :action Vcs.Show.Log<cr>
+nmap <leader>yd :action Compare.LastVersion<cr>
+" nmap <leader>yr :action Git.ResolveConflicts<cr>                          
+
+" Terminal
+" nmap <leader>T :action ActivateTerminalToolWindow<cr>                          
+
+" External GVim
+" nmap <leader>v :action Tool_External Tools_gvim<cr>
+
+" External Sublime Text
+" nmap <leader>S :action Tool_External Tools_sublime_text<cr>
